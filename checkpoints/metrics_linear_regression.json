@@ -1,0 +1,11 @@
+{
+    "model_name": "Multiple Linear Regression",
+    "slug": "linear_regression",
+    "train_r2": 0.24425793678124674,
+    "test_r2": 0.19100259651574625,
+    "test_mae_usd": 31971.878758596347,
+    "test_mse": 7761507191.220543,
+    "test_rmse_usd": 88099.41652031835,
+    "cv_5fold_mean_r2": 0.2271782860009469,
+    "cv_5fold_std_r2": 0.02730909561535265
+}

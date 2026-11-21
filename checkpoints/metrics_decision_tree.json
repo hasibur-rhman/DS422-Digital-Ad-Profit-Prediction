@@ -1,0 +1,11 @@
+{
+    "model_name": "Decision Tree",
+    "slug": "decision_tree",
+    "train_r2": 0.579855675451415,
+    "test_r2": -0.15718116797146853,
+    "test_mae_usd": 28909.310768560335,
+    "test_mse": 11101976246.244349,
+    "test_rmse_usd": 105365.91596073347,
+    "cv_5fold_mean_r2": -0.24035672042758155,
+    "cv_5fold_std_r2": 0.1569697978844962
+}

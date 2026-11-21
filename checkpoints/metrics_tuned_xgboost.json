@@ -1,0 +1,19 @@
+{
+    "model_name": "Tuned XGBoost Regressor",
+    "slug": "tuned_xgboost",
+    "best_params": {
+        "subsample": 0.95,
+        "reg_lambda": 3.0,
+        "reg_alpha": 1.0,
+        "n_estimators": 200,
+        "max_depth": 4,
+        "learning_rate": 0.1,
+        "colsample_bytree": 0.85
+    },
+    "train_r2": 0.8455398992772507,
+    "test_r2": 0.3725536228284355,
+    "test_mae_usd": 22545.669272219806,
+    "test_mse": 6019709763.650883,
+    "test_rmse_usd": 77586.78858962319,
+    "cv_5fold_best_r2": 0.3940472349350272
+}

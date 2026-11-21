@@ -1,0 +1,11 @@
+{
+    "model_name": "Lasso Regression",
+    "slug": "lasso_regression",
+    "train_r2": 0.244238743018383,
+    "test_r2": 0.19126607137666818,
+    "test_mae_usd": 31896.246281661297,
+    "test_mse": 7758979417.931106,
+    "test_rmse_usd": 88085.06921113876,
+    "cv_5fold_mean_r2": 0.22755826108172866,
+    "cv_5fold_std_r2": 0.02717244663180889
+}

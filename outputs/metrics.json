@@ -1,0 +1,192 @@
+{
+    "dataset": {
+        "filename": "tech_advertising_campaigns_dataset.csv",
+        "rows": 10000,
+        "cols": 41,
+        "duplicates": 0,
+        "missing_values": 0,
+        "profitable_campaigns_pct": 78.31,
+        "loss_making_campaigns_pct": 21.69,
+        "zero_conversion_pct": 5.94,
+        "profit_stats": {
+            "mean": 24070.204468,
+            "median": 3302.535,
+            "std": 86416.09855362335,
+            "min": -36939.84,
+            "max": 2750397.93,
+            "skewness": 13.031008855552049,
+            "kurtosis": 265.4273439061532
+        }
+    },
+    "data_leakage_audit": {
+        "dropped_columns": [
+            "campaign_id",
+            "start_date",
+            "actual_cpc",
+            "clicks",
+            "conversions",
+            "ad_spend",
+            "revenue",
+            "CTR",
+            "CPC",
+            "conversion_rate",
+            "CPA",
+            "ROAS",
+            "profit"
+        ],
+        "reason": "Excluded mathematical target components (revenue, ad_spend), post-campaign mechanical outcomes (clicks, conversions, actual_cpc), derived KPIs (CTR, CPC, conversion_rate, CPA, ROAS), identifier (campaign_id), and raw date string (start_date).",
+        "final_feature_count": 28,
+        "encoded_feature_count": 78,
+        "train_samples": 8000,
+        "test_samples": 2000
+    },
+    "models": [
+        {
+            "model_name": "Multiple Linear Regression",
+            "slug": "linear_regression",
+            "train_r2": 0.24425793678124674,
+            "test_r2": 0.19100259651574625,
+            "test_mae_usd": 31971.878758596347,
+            "test_mse": 7761507191.220543,
+            "test_rmse_usd": 88099.41652031835,
+            "cv_5fold_mean_r2": 0.2271782860009469,
+            "cv_5fold_std_r2": 0.02730909561535265
+        },
+        {
+            "model_name": "Ridge Regression",
+            "slug": "ridge_regression",
+            "train_r2": 0.2442346678079904,
+            "test_r2": 0.19125768853728142,
+            "test_mae_usd": 31859.08862330771,
+            "test_mse": 7759059842.748173,
+            "test_rmse_usd": 88085.52572782984,
+            "cv_5fold_mean_r2": 0.22770381460912176,
+            "cv_5fold_std_r2": 0.027053498531389605
+        },
+        {
+            "model_name": "Lasso Regression",
+            "slug": "lasso_regression",
+            "train_r2": 0.244238743018383,
+            "test_r2": 0.19126607137666818,
+            "test_mae_usd": 31896.246281661297,
+            "test_mse": 7758979417.931106,
+            "test_rmse_usd": 88085.06921113876,
+            "cv_5fold_mean_r2": 0.22755826108172866,
+            "cv_5fold_std_r2": 0.02717244663180889
+        },
+        {
+            "model_name": "Decision Tree",
+            "slug": "decision_tree",
+            "train_r2": 0.579855675451415,
+            "test_r2": -0.15718116797146853,
+            "test_mae_usd": 28909.310768560335,
+            "test_mse": 11101976246.244349,
+            "test_rmse_usd": 105365.91596073347,
+            "cv_5fold_mean_r2": -0.24035672042758155,
+            "cv_5fold_std_r2": 0.1569697978844962
+        },
+        {
+            "model_name": "Random Forest",
+            "slug": "random_forest",
+            "train_r2": 0.8808018883706925,
+            "test_r2": 0.33272656645829646,
+            "test_mae_usd": 24457.86562598937,
+            "test_mse": 6401809858.274977,
+            "test_rmse_usd": 80011.31081462781,
+            "cv_5fold_mean_r2": 0.305050860787488,
+            "cv_5fold_std_r2": 0.06214701209189495
+        },
+        {
+            "model_name": "XGBoost",
+            "slug": "xgboost",
+            "train_r2": 0.8587715701328363,
+            "test_r2": 0.3413618513140966,
+            "test_mae_usd": 21982.56057994316,
+            "test_mse": 6318963083.714427,
+            "test_rmse_usd": 79491.90577482985,
+            "cv_5fold_mean_r2": 0.4057830818125151,
+            "cv_5fold_std_r2": 0.08258804783537649
+        }
+    ],
+    "tuned_model": {
+        "model_name": "Tuned XGBoost Regressor",
+        "slug": "tuned_xgboost",
+        "best_params": {
+            "subsample": 0.95,
+            "reg_lambda": 3.0,
+            "reg_alpha": 1.0,
+            "n_estimators": 200,
+            "max_depth": 4,
+            "learning_rate": 0.1,
+            "colsample_bytree": 0.85
+        },
+        "train_r2": 0.8455398992772507,
+        "test_r2": 0.3725536228284355,
+        "test_mae_usd": 22545.669272219806,
+        "test_mse": 6019709763.650883,
+        "test_rmse_usd": 77586.78858962319,
+        "cv_5fold_best_r2": 0.3940472349350272
+    },
+    "top_features_xgboost": [
+        {
+            "feature": "budget_tier_Medium",
+            "importance": 0.10352017730474472
+        },
+        {
+            "feature": "creative_format_Interactive",
+            "importance": 0.05394686385989189
+        },
+        {
+            "feature": "ad_placement_Stories",
+            "importance": 0.04367315024137497
+        },
+        {
+            "feature": "budget_tier_Low",
+            "importance": 0.03812689334154129
+        },
+        {
+            "feature": "bounce_rate",
+            "importance": 0.03667678311467171
+        },
+        {
+            "feature": "income_bracket_>$200K",
+            "importance": 0.03440453112125397
+        },
+        {
+            "feature": "retargeting_flag_True",
+            "importance": 0.03384224697947502
+        },
+        {
+            "feature": "quality_score",
+            "importance": 0.03318650275468826
+        },
+        {
+            "feature": "industry_vertical_Finance",
+            "importance": 0.030150676146149635
+        },
+        {
+            "feature": "device_type_Mobile",
+            "importance": 0.028318019583821297
+        },
+        {
+            "feature": "campaign_objective_Lead Generation",
+            "importance": 0.027249788865447044
+        },
+        {
+            "feature": "quarter",
+            "importance": 0.025337614119052887
+        },
+        {
+            "feature": "ad_copy_length_Medium",
+            "importance": 0.02430904656648636
+        },
+        {
+            "feature": "target_audience_age_35-44",
+            "importance": 0.0237809419631958
+        },
+        {
+            "feature": "device_type_Tablet",
+            "importance": 0.02337542548775673
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "model_name": "Random Forest",
+    "slug": "random_forest",
+    "train_r2": 0.8808018883706925,
+    "test_r2": 0.33272656645829646,
+    "test_mae_usd": 24457.86562598937,
+    "test_mse": 6401809858.274977,
+    "test_rmse_usd": 80011.31081462781,
+    "cv_5fold_mean_r2": 0.305050860787488,
+    "cv_5fold_std_r2": 0.06214701209189495
+}

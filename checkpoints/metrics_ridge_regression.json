@@ -1,0 +1,11 @@
+{
+    "model_name": "Ridge Regression",
+    "slug": "ridge_regression",
+    "train_r2": 0.2442346678079904,
+    "test_r2": 0.19125768853728142,
+    "test_mae_usd": 31859.08862330771,
+    "test_mse": 7759059842.748173,
+    "test_rmse_usd": 88085.52572782984,
+    "cv_5fold_mean_r2": 0.22770381460912176,
+    "cv_5fold_std_r2": 0.027053498531389605
+}
