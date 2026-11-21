@@ -134,35 +134,32 @@ All models were evaluated on the identical 80/20 train-test split (`random_state
 
 ---
 
-## 💻 Live Campaign Profit Simulator & Web Application
+## 💻 Single-Page Website (New Brutalism Design)
 
-The project includes a production-ready, ultra-clean web application (`index.html`) deployed live on **GitHub Pages**:
+The project includes an interactive, production-ready one-page website (`index.html`) crafted in a **New Brutalism (Neo-Brutalism)** aesthetic, deployed live on **GitHub Pages**:
 
-🔗 **Live URL:** [https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/](https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/)
+🔗 **Live Deployment URL:** [https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/](https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/)
 
-* **Ultra-Clean, Minimal Design:** Focused strictly on pre-launch media planning controls and instant profit calculation.
-* **Pre-Launch Media Planning Controls:**
-  - Advertising Platform (LinkedIn, YouTube, Google Ads, Meta, TikTok, Twitter, Pinterest)
-  - Industry Vertical (Finance, Technology, Healthcare, E-Commerce, Education, Automotive)
-  - Creative Format (Video, Carousel, Static Image, Text)
-  - Target Device (Desktop, Mobile, Tablet)
-  - Impression Scale (Interactive Slider: 10,000 to 400,000)
-  - Flight Duration (Interactive Slider: 7 to 90 Days)
-  - Quality Score (Interactive Slider: 1.0 to 10.0)
-  - Audience Segment (Retargeting vs. Cold Prospecting)
-  - Income Bracket (> $100K, $50K–$100K, < $50K)
-  - Purchase Intent (High, Medium, Low)
-* **Real-Time Client-Side Inference:** Instantly computes **Predicted Net Campaign Profit ($USD)** with dynamic color coding (Gold for high profit, Sky for positive margin, Rose for negative burn).
+### 🎨 Neo-Brutalism Design & Architecture Highlights:
+* **Neo-Brutalist Visual System:** High-contrast 3px/4px solid black borders, hard offset drop shadows (`shadow-[5px_5px_0px_0px_#121212]`), vibrant saturated pastels (Canary Yellow `#FFE600`, Mint `#34D399`, Coral `#FF6B6B`, Cyan `#38BDF8`), and Google Fonts (`Space Grotesk` + `JetBrains Mono`).
+* **Top Animated Ticker Marquee:** Continuous tape displaying critical lab metadata, model metrics, and GPU architecture.
+* **Project Showcase & Problem Formulation:** Full presentation of the 10,000-campaign dataset (2024–2026), problem scope, and business objectives.
+* **Rigorous Task Justification (Leakage Audit Matrix):** Clear domain and mathematical justification for excluding 13 leakage columns, with an interactive VIF table proving zero multicollinearity ($VIF < 1.0003$).
+* **Interactive 5-Tab EDA Visual Lab:** High-resolution 300 DPI figure gallery covering Profit Distribution, Categorical Drivers, Platform & Quarterly Seasonality, Correlation Heatmap, and IQR Outliers with viva-ready analytical takeaways.
+* **Model Arena Leaderboard:** Comprehensive comparison table across all 6 regression models + Tuned XGBoost, complete with Figure 06 and deep-dive viva cards on Decision Tree failure vs. XGBoost dominance.
+* **🔥 Live Campaign Profit Simulator:** Embedded client-side inference engine allowing users/evaluators to manipulate pre-launch parameters (Platform, Industry, Format, Device, Impressions, Duration, Quality Score, Retargeting, Income, Intent) and receive real-time projected profit ($USD), confidence ranges, and AI optimization recommendations.
+* **Explainability & Diagnostics:** Gain-based Feature Importance chart (Figure 09), Actual vs. Predicted scatter (Figure 07), and Residual distribution (Figure 08).
+* **Colab T4 GPU & Artifact Center:** Explains sub-10-second Drive checkpoint recovery with one-click direct download cards for the notebook, audit summary, metrics JSON, and comparison CSV.
 
 ---
 
 ## 🚀 How to Run the Web Application
 
 ### Option 0: Live Cloud Deployment (No Installation Required)
-Access the live simulator directly in any modern browser:  
+Access the live website directly in any modern browser:  
 👉 **[https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/](https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/)**
 
-The web application is also **100% standalone and zero-dependency** for local execution (no Node.js build steps, Webpack, or external bundlers required). All stylesheets and icons load via CDN or inline SVGs.
+The web application is also **100% standalone and zero-dependency** for local execution (no Node.js build steps, Webpack, or external bundlers required). All stylesheets and fonts load via CDN.
 
 ### Option 1: Instant Browser Launch (Zero-Setup)
 Simply navigate to the project directory and open `index.html` directly:
