@@ -4,12 +4,16 @@
 **Lead Author:** Hasibur Rahman  
 **Repository:** `DS422-Digital-Ad-Profit-Prediction`  
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/)
+
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-v1.4+-orange.svg)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-GPU--Accelerated-green.svg)](https://xgboost.readthedocs.io/)
 [![Google Colab](https://img.shields.io/badge/Colab-Tesla%20T4%20Ready-yellow.svg)](https://colab.research.google.com/)
 [![Tailwind CSS](https://img.shields.io/badge/UI-Tailwind%20CSS%20CDN-38bdf8.svg)](https://tailwindcss.com/)
 [![Status](https://img.shields.io/badge/Status-Evaluation%20Ready-brightgreen.svg)]()
+
+> 🚀 **Live Interactive Web Simulator:** [https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/](https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/)
 
 ---
 
@@ -130,29 +134,35 @@ All models were evaluated on the identical 80/20 train-test split (`random_state
 
 ---
 
-## 💻 Executive Web Application & Live Simulator
+## 💻 Live Campaign Profit Simulator & Web Application
 
-The project includes a production-ready, single-page web application (`index.html`) implementing **UI Option C (Executive Marketing Analytics Command Center)**:
+The project includes a production-ready, ultra-clean web application (`index.html`) deployed live on **GitHub Pages**:
 
-* **Dark Executive Palette:** Deep charcoal background (`#0a0d14`, `#111522`), frosted glass cards (`#161c2e`), and high-contrast amber/gold (`#f59e0b`) and electric sky/cyan (`#38bdf8`) accents.
-* **Top Executive Ticker Ribbon:** Continuous animated tape highlighting key project metrics.
-* **Interactive Data Leakage Matrix:** Expandable cards categorizing the 13 dropped features.
-* **5-Tab High-Resolution EDA Viewer:** Interactive switcher for all diagnostic figures.
-* **Regression Leaderboard:** Filterable model comparison table with error diagnostics.
-* **🔥 Live Campaign Profit Simulator & Risk Calculator:**
-  - Dynamic user controls: Platform, Industry, Creative Format, Target Device, Impression Volume, Flight Duration, Ad Quality Score, Audience Income, and Retargeting Flag.
-  - Client-side inference engine calculates:
-    - **Predicted Net Campaign Profit ($USD)** with 90% confidence range.
-    - **Margin Tier Badge** (Tier A / Tier B / Tier C).
-    - **Break-Even Probability & Risk Warning** (e.g., "Optimal Margin" vs. "High Risk / Volatile").
-    - **Algorithmic Strategy Recommendation** updated in real-time based on selected parameters.
-* **Artifact Download Center:** One-click downloads for the Colab Notebook, Analysis Summary, Metrics JSON, and Model Comparison CSV.
+🔗 **Live URL:** [https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/](https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/)
+
+* **Ultra-Clean, Minimal Design:** Focused strictly on pre-launch media planning controls and instant profit calculation.
+* **Pre-Launch Media Planning Controls:**
+  - Advertising Platform (LinkedIn, YouTube, Google Ads, Meta, TikTok, Twitter, Pinterest)
+  - Industry Vertical (Finance, Technology, Healthcare, E-Commerce, Education, Automotive)
+  - Creative Format (Video, Carousel, Static Image, Text)
+  - Target Device (Desktop, Mobile, Tablet)
+  - Impression Scale (Interactive Slider: 10,000 to 400,000)
+  - Flight Duration (Interactive Slider: 7 to 90 Days)
+  - Quality Score (Interactive Slider: 1.0 to 10.0)
+  - Audience Segment (Retargeting vs. Cold Prospecting)
+  - Income Bracket (> $100K, $50K–$100K, < $50K)
+  - Purchase Intent (High, Medium, Low)
+* **Real-Time Client-Side Inference:** Instantly computes **Predicted Net Campaign Profit ($USD)** with dynamic color coding (Gold for high profit, Sky for positive margin, Rose for negative burn).
 
 ---
 
-## 🚀 How to Run the Web Application Locally
+## 🚀 How to Run the Web Application
 
-The web application is **100% standalone and zero-dependency** (no Node.js build steps, Webpack, or external bundlers required). All stylesheets and icons load via CDN or inline SVGs.
+### Option 0: Live Cloud Deployment (No Installation Required)
+Access the live simulator directly in any modern browser:  
+👉 **[https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/](https://hasibur-rhman.github.io/DS422-Digital-Ad-Profit-Prediction/)**
+
+The web application is also **100% standalone and zero-dependency** for local execution (no Node.js build steps, Webpack, or external bundlers required). All stylesheets and icons load via CDN or inline SVGs.
 
 ### Option 1: Instant Browser Launch (Zero-Setup)
 Simply navigate to the project directory and open `index.html` directly:
