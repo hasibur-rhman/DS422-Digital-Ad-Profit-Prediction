@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Campaign Profit Simulator // DS422 ML-I</title>
+  <title>Campaign Profit Simulator</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -18,9 +18,7 @@
               card: '#151b2e',
               border: '#222b44',
               hover: '#293554',
-              amber: '#f59e0b',
               gold: '#fbbf24',
-              cyan: '#06b6d4',
               sky: '#38bdf8',
               emerald: '#10b981',
               rose: '#f43f5e'
@@ -34,192 +32,113 @@
       }
     }
   </script>
-  <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0a0d14; }
-    ::-webkit-scrollbar-thumb { background: #222b44; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
-    .glow-gold:hover { box-shadow: 0 0 30px rgba(245, 158, 11, 0.2); }
-    .glow-emerald { box-shadow: 0 0 25px rgba(16, 185, 129, 0.2); }
-    .glow-rose { box-shadow: 0 0 25px rgba(244, 63, 94, 0.2); }
-  </style>
 </head>
-<body class="bg-brand-dark text-slate-200 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-amber selection:text-black">
+<body class="bg-brand-dark text-slate-200 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-gold selection:text-black">
 
-  <!-- TOP HEADER / BRAND BAR -->
+  <!-- TOP HEADER -->
   <header class="border-b border-brand-border bg-brand-surface/90 sticky top-0 z-50 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-amber via-brand-gold to-brand-cyan flex items-center justify-center font-bold text-black font-mono text-lg shadow-lg shadow-amber-500/20">
-          ΔP
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-cyan-500 flex items-center justify-center font-bold text-black font-mono text-base shadow-lg shadow-amber-500/20">
+          $
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="font-bold text-white tracking-tight text-base sm:text-lg">Live Campaign Profit Simulator</h1>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-brand-card text-brand-gold font-mono border border-brand-border uppercase">DS422 ML-I</span>
-          </div>
-          <p class="text-[11px] text-slate-400 font-mono hidden sm:block">Real-Time Pre-Launch Media Planning &amp; Risk Assessment</p>
-        </div>
+        <h1 class="font-bold text-white tracking-tight text-base sm:text-lg">Campaign Profit Simulator</h1>
       </div>
-
-      <!-- Quick Status Badges -->
-      <div class="flex items-center space-x-2 text-xs font-mono">
-        <span class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-card text-brand-emerald border border-brand-border">
-          <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
-          Engine: Tuned XGBoost (R²: 0.3726)
-        </span>
-        <button onclick="resetDefaults()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-card hover:bg-brand-hover text-brand-sky border border-brand-border transition-all flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          Reset Defaults
-        </button>
-      </div>
+      <button onclick="resetDefaults()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-brand-card hover:bg-brand-hover text-slate-300 border border-brand-border transition-all flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Reset
+      </button>
     </div>
   </header>
 
   <!-- MAIN SIMULATOR INTERFACE -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
-    
-    <!-- SUB-HEADER SCENARIO PRESETS BAR -->
-    <div class="mb-6 bg-brand-surface/70 border border-brand-border rounded-xl p-3 sm:p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-      <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
-        <span class="text-brand-gold font-bold uppercase">⚡ Quick Scenarios:</span>
-        <span class="text-slate-400 hidden sm:inline">Click a preset to test model behavior instantly:</span>
-      </div>
-      <div class="flex flex-wrap gap-2 text-xs font-mono">
-        <button onclick="loadScenario('enterprise')" class="px-3 py-1 rounded-lg bg-brand-card hover:bg-brand-hover text-brand-gold border border-brand-border transition-colors">
-          🏆 Enterprise LinkedIn (High ROI)
-        </button>
-        <button onclick="loadScenario('retargeting')" class="px-3 py-1 rounded-lg bg-brand-card hover:bg-brand-hover text-brand-emerald border border-brand-border transition-colors">
-          🎯 Video Retargeting Blitz
-        </button>
-        <button onclick="loadScenario('social')" class="px-3 py-1 rounded-lg bg-brand-card hover:bg-brand-hover text-brand-sky border border-brand-border transition-colors">
-          📱 TikTok Mobile Prospecting
-        </button>
-        <button onclick="loadScenario('risky')" class="px-3 py-1 rounded-lg bg-brand-card hover:bg-brand-hover text-brand-rose border border-brand-border transition-colors">
-          ⚠️ High Risk Display Burn
-        </button>
-      </div>
-    </div>
-
-    <!-- MAIN TWO-COLUMN WORKSPACE -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
       <!-- LEFT COLUMN: CONTROLS & MEDIA PLANNING INPUTS -->
-      <div class="lg:col-span-7 bg-brand-card/90 border border-brand-border rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl">
-        <div class="flex items-center justify-between border-b border-brand-border pb-3">
-          <h2 class="text-sm font-bold text-white font-mono uppercase tracking-wider flex items-center gap-2">
-            <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
-            Pre-Launch Media Planning Inputs
-          </h2>
-          <span class="text-[11px] font-mono text-slate-400">Strictly Leakage-Free Predictors</span>
-        </div>
+      <div class="lg:col-span-7 bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-7 space-y-6 shadow-xl">
+        <h2 class="text-xs font-bold text-slate-400 font-mono uppercase tracking-wider border-b border-brand-border pb-3">
+          Campaign Inputs
+        </h2>
 
         <!-- 4-GRID SELECTORS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- Platform -->
           <div>
-            <label class="block text-xs font-mono text-slate-300 mb-1.5 flex items-center justify-between">
-              <span>Advertising Platform</span>
-              <span class="text-[10px] text-brand-gold">Channel ROI</span>
-            </label>
-            <select id="sim-platform" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition-colors font-sans">
-              <option value="LinkedIn" selected>LinkedIn (B2B High Ticket)</option>
-              <option value="YouTube">YouTube (High Video Engagement)</option>
-              <option value="Google Ads">Google Ads (High Purchase Intent)</option>
-              <option value="Instagram">Meta / Instagram (Visual Discovery)</option>
-              <option value="TikTok">TikTok (Fast Viral Reach)</option>
-              <option value="Twitter">Twitter / X (Real-Time Buzz)</option>
-              <option value="Pinterest">Pinterest (High Shopper Intent)</option>
+            <label class="block text-xs font-mono text-slate-300 mb-1.5">Advertising Platform</label>
+            <select id="sim-platform" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold font-sans">
+              <option value="LinkedIn" selected>LinkedIn</option>
+              <option value="YouTube">YouTube</option>
+              <option value="Google Ads">Google Ads</option>
+              <option value="Instagram">Meta / Instagram</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Twitter">Twitter / X</option>
+              <option value="Pinterest">Pinterest</option>
             </select>
           </div>
 
           <!-- Industry Vertical -->
           <div>
-            <label class="block text-xs font-mono text-slate-300 mb-1.5 flex items-center justify-between">
-              <span>Industry Vertical</span>
-              <span class="text-[10px] text-brand-sky">LTV Economics</span>
-            </label>
-            <select id="sim-industry" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition-colors font-sans">
-              <option value="Finance" selected>Finance &amp; Banking (+High Margin)</option>
+            <label class="block text-xs font-mono text-slate-300 mb-1.5">Industry Vertical</label>
+            <select id="sim-industry" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold font-sans">
+              <option value="Finance" selected>Finance &amp; Banking</option>
               <option value="Technology">Technology &amp; SaaS</option>
               <option value="Healthcare">Healthcare &amp; Wellness</option>
               <option value="E-commerce">E-Commerce &amp; Retail</option>
-              <option value="Education">Education &amp; E-Learning</option>
-              <option value="Automotive">Automotive &amp; Transport</option>
+              <option value="Education">Education</option>
+              <option value="Automotive">Automotive</option>
             </select>
           </div>
 
           <!-- Creative Format -->
           <div>
-            <label class="block text-xs font-mono text-slate-300 mb-1.5 flex items-center justify-between">
-              <span>Creative Format</span>
-              <span class="text-[10px] text-brand-emerald">Engagement Lift</span>
-            </label>
-            <select id="sim-creative" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition-colors font-sans">
-              <option value="Video" selected>Video Ad (+Premium Conversion)</option>
-              <option value="Carousel">Interactive Carousel</option>
+            <label class="block text-xs font-mono text-slate-300 mb-1.5">Creative Format</label>
+            <select id="sim-creative" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold font-sans">
+              <option value="Video" selected>Video Ad</option>
+              <option value="Carousel">Carousel</option>
               <option value="Static Image">Static Display Image</option>
-              <option value="Text">Sponsored Text / Search</option>
+              <option value="Text">Text</option>
             </select>
           </div>
 
           <!-- Target Device -->
           <div>
-            <label class="block text-xs font-mono text-slate-300 mb-1.5 flex items-center justify-between">
-              <span>Primary Target Device</span>
-              <span class="text-[10px] text-slate-400">Checkout Stability</span>
-            </label>
-            <select id="sim-device" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold transition-colors font-sans">
-              <option value="Desktop" selected>Desktop / Workstation (Higher Basket)</option>
-              <option value="Mobile">Mobile Smartphone</option>
-              <option value="Tablet">Tablet Device</option>
+            <label class="block text-xs font-mono text-slate-300 mb-1.5">Primary Target Device</label>
+            <select id="sim-device" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold font-sans">
+              <option value="Desktop" selected>Desktop</option>
+              <option value="Mobile">Mobile</option>
+              <option value="Tablet">Tablet</option>
             </select>
           </div>
         </div>
 
         <!-- SLIDER CONTROLS -->
-        <div class="space-y-5 pt-2">
+        <div class="space-y-4 pt-1">
           <!-- Impressions Slider -->
           <div class="bg-brand-dark/50 p-3.5 rounded-xl border border-brand-border">
             <div class="flex justify-between items-center text-xs font-mono mb-2">
-              <span class="text-slate-300">Target Impression Scale (Volume):</span>
+              <span class="text-slate-300">Impressions:</span>
               <span id="val-impressions" class="text-brand-sky font-bold text-sm">85,000</span>
             </div>
             <input type="range" id="sim-impressions" min="10000" max="400000" step="5000" value="85000" oninput="calculateProfit()" class="w-full h-1.5 bg-brand-surface rounded-lg appearance-none cursor-pointer accent-brand-sky">
-            <div class="flex justify-between text-[10px] font-mono text-slate-500 mt-1">
-              <span>10,000 (Niche)</span>
-              <span>200,000 (Broad)</span>
-              <span>400,000 (Mass Market)</span>
-            </div>
           </div>
 
           <!-- Campaign Flight Duration Slider -->
           <div class="bg-brand-dark/50 p-3.5 rounded-xl border border-brand-border">
             <div class="flex justify-between items-center text-xs font-mono mb-2">
-              <span class="text-slate-300">Campaign Flight Duration (Learning Window):</span>
+              <span class="text-slate-300">Flight Duration:</span>
               <span id="val-duration" class="text-brand-gold font-bold text-sm">45 Days</span>
             </div>
             <input type="range" id="sim-duration" min="7" max="90" step="1" value="45" oninput="calculateProfit()" class="w-full h-1.5 bg-brand-surface rounded-lg appearance-none cursor-pointer accent-brand-gold">
-            <div class="flex justify-between text-[10px] font-mono text-slate-500 mt-1">
-              <span>7 Days (Cold-start turbulence)</span>
-              <span>30 Days (Optimized)</span>
-              <span>90 Days (Matured flight)</span>
-            </div>
           </div>
 
           <!-- Ad Creative Quality Score Slider -->
           <div class="bg-brand-dark/50 p-3.5 rounded-xl border border-brand-border">
             <div class="flex justify-between items-center text-xs font-mono mb-2">
-              <span class="text-slate-300">Ad Creative Quality Score (Platform Rating):</span>
+              <span class="text-slate-300">Quality Score:</span>
               <span id="val-quality" class="text-brand-emerald font-bold text-sm">8.5 / 10</span>
             </div>
             <input type="range" id="sim-quality" min="1" max="10" step="0.5" value="8.5" oninput="calculateProfit()" class="w-full h-1.5 bg-brand-surface rounded-lg appearance-none cursor-pointer accent-brand-emerald">
-            <div class="flex justify-between text-[10px] font-mono text-slate-500 mt-1">
-              <span>1.0 (Low relevance / High bid penalty)</span>
-              <span>5.5 (Average)</span>
-              <span>10.0 (Optimal discount)</span>
-            </div>
           </div>
         </div>
 
@@ -229,8 +148,8 @@
           <div>
             <label class="block text-xs font-mono text-slate-300 mb-1.5">Audience Segment</label>
             <select id="sim-retargeting" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold font-sans">
-              <option value="true" selected>Retargeting (Warm Audience)</option>
-              <option value="false">Cold Prospecting (New Visitors)</option>
+              <option value="true" selected>Retargeting</option>
+              <option value="false">Cold Prospecting</option>
             </select>
           </div>
 
@@ -238,9 +157,9 @@
           <div>
             <label class="block text-xs font-mono text-slate-300 mb-1.5">Income Bracket</label>
             <select id="sim-income" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold font-sans">
-              <option value="high" selected>&gt; $100K (High Purchasing Power)</option>
-              <option value="medium">$50K – $100K (Middle Tier)</option>
-              <option value="low">&lt; $50K (Budget Sensitive)</option>
+              <option value="high" selected>&gt; $100K</option>
+              <option value="medium">$50K – $100K</option>
+              <option value="low">&lt; $50K</option>
             </select>
           </div>
 
@@ -248,85 +167,38 @@
           <div>
             <label class="block text-xs font-mono text-slate-300 mb-1.5">Purchase Intent</label>
             <select id="sim-intent" onchange="calculateProfit()" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold font-sans">
-              <option value="high" selected>High Intent (Ready to Buy)</option>
-              <option value="medium">Medium Intent (Evaluating)</option>
-              <option value="low">Low Intent (Passive Browsing)</option>
+              <option value="high" selected>High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
             </select>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN: EXECUTIVE OUTPUT PROJECTION -->
-      <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
-        
-        <!-- PROJECTION CARD -->
-        <div class="bg-brand-card/95 border border-brand-border rounded-2xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden">
-          <div class="flex items-center justify-between border-b border-brand-border pb-3">
-            <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Executive Projection</span>
-            <span id="sim-risk-badge" class="px-3 py-0.5 rounded text-xs font-mono font-bold bg-brand-emerald/20 text-brand-emerald border border-brand-emerald/40 uppercase">
-              Optimal Margin
-            </span>
+      <!-- RIGHT COLUMN: OUTPUT DISPLAY -->
+      <div class="lg:col-span-5 lg:sticky lg:top-24">
+        <div class="bg-brand-card border border-brand-border rounded-2xl p-8 sm:p-10 shadow-2xl text-center">
+          <div class="text-xs font-mono text-slate-400 mb-3 uppercase tracking-wider">
+            PREDICTED NET CAMPAIGN PROFIT
           </div>
-
-          <!-- PREDICTED PROFIT HERO DISPLAY -->
-          <div class="text-center py-6 bg-brand-dark/80 rounded-2xl border border-brand-border relative overflow-hidden">
-            <div class="text-xs font-mono text-slate-400 mb-1 uppercase tracking-wider">PREDICTED NET CAMPAIGN PROFIT</div>
-            <div id="sim-profit" class="text-5xl sm:text-6xl font-extrabold text-brand-gold font-mono tracking-tight my-1">
-              $46,920
-            </div>
-            <div id="sim-margin-text" class="text-xs font-mono text-brand-emerald mt-2">
-              90% Confidence Interval: $41,290 – $52,550
-            </div>
+          <div id="sim-profit" class="text-5xl sm:text-6xl font-extrabold text-brand-gold font-mono tracking-tight my-4">
+            $46,920
           </div>
-
-          <!-- METRICS MATRIX -->
-          <div class="grid grid-cols-2 gap-3 text-xs font-mono">
-            <div class="bg-brand-dark/60 p-3.5 rounded-xl border border-brand-border">
-              <span class="text-slate-400 block mb-1">Expected Margin Tier</span>
-              <strong id="sim-tier" class="text-brand-emerald text-sm">Tier A (High ROI)</strong>
-            </div>
-            <div class="bg-brand-dark/60 p-3.5 rounded-xl border border-brand-border">
-              <span class="text-slate-400 block mb-1">Break-Even Safe Rate</span>
-              <strong id="sim-prob" class="text-brand-emerald text-sm">96.8% Safe</strong>
-            </div>
-          </div>
-
-          <!-- DYNAMIC STRATEGY RECOMMENDATION -->
-          <div class="bg-brand-dark/70 p-4 rounded-xl border border-brand-border space-y-2">
-            <div class="text-xs font-mono text-brand-sky font-semibold flex items-center gap-1.5">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Algorithmic Optimization Strategy:</span>
-            </div>
-            <p id="sim-advice" class="text-xs text-slate-300 leading-relaxed font-sans">
-              Strong projected return. Combining Video Creative on Desktop with Retargeting for Finance captures maximum customer lifetime value. Maintain flight duration past 30 days to avoid algorithmic bid resets.
-            </p>
-          </div>
-
-          <!-- BENCHMARK VERIFICATION NOTE -->
-          <div class="pt-2 border-t border-brand-border/60 text-[11px] font-mono text-slate-500 flex items-center justify-between">
-            <span>Trained on 10,000 campaigns</span>
-            <span>DS422 Lab Project</span>
-          </div>
+          <p class="text-xs text-slate-400 font-mono mt-4">
+            Estimated net return based on selected campaign parameters.
+          </p>
         </div>
-
       </div>
+
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-brand-border bg-brand-surface py-6 text-xs font-mono text-slate-500 mt-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-      <div>
-        <strong class="text-slate-300">DS422: Machine Learning I</strong> • Digital Advertising Campaign Profit Simulator
-        <div class="text-[11px] text-slate-500 mt-0.5">Evaluation Date: 22nd November, 2026 • Lead Author: Hasibur Rahman</div>
-      </div>
-      <div class="text-slate-400 text-[11px]">
-        Calibrated with Scikit-Learn &amp; GPU-Accelerated Tuned XGBoost
-      </div>
-    </div>
+  <!-- MINIMAL FOOTER -->
+  <footer class="border-t border-brand-border bg-brand-surface/40 py-4 text-xs font-mono text-slate-500 text-center">
+    <span>Digital Advertising Campaign Profit Simulator</span>
   </footer>
 
-  <!-- REAL-TIME INFERENCE SCRIPT -->
+  <!-- SCRIPT -->
   <script>
     function calculateProfit() {
       const platform = document.getElementById('sim-platform').value;
@@ -340,15 +212,15 @@
       const income = document.getElementById('sim-income').value;
       const intent = document.getElementById('sim-intent').value;
 
-      // Update slider numbers
+      // Update labels
       document.getElementById('val-impressions').textContent = impressions.toLocaleString();
       document.getElementById('val-duration').textContent = duration + ' Days';
       document.getElementById('val-quality').textContent = quality.toFixed(1) + ' / 10';
 
-      // Base Empirical Intercept
+      // Base
       let profit = 24070;
 
-      // Platform Effect
+      // Platform
       const platformWeights = {
         'LinkedIn': 13800,
         'YouTube': 9800,
@@ -360,7 +232,7 @@
       };
       profit += (platformWeights[platform] || 0);
 
-      // Industry Effect
+      // Industry
       const industryWeights = {
         'Finance': 19500,
         'Technology': 11800,
@@ -371,7 +243,7 @@
       };
       profit += (industryWeights[industry] || 0);
 
-      // Creative Format Effect
+      // Creative
       const creativeWeights = {
         'Video': 8900,
         'Carousel': 4500,
@@ -380,7 +252,7 @@
       };
       profit += (creativeWeights[creative] || 0);
 
-      // Device Effect
+      // Device
       const deviceWeights = {
         'Desktop': 9600,
         'Mobile': -4900,
@@ -388,128 +260,51 @@
       };
       profit += (deviceWeights[device] || 0);
 
-      // Scale (Impressions) Logarithmic Dynamics
+      // Impressions
       const impressionEffect = (impressions - 70000) * 0.115;
       profit += impressionEffect;
 
-      // Flight Duration Effect (Maturation of ad platform bidding)
+      // Duration
       const durationEffect = (duration - 30) * 260;
       profit += durationEffect;
 
-      // Quality Score Effect
+      // Quality
       const qualityEffect = (quality - 5.5) * 3400;
       profit += qualityEffect;
 
-      // Retargeting Boost
+      // Retargeting
       if (retargeting) profit += 14800;
 
-      // Income Bracket Effect
+      // Income
       if (income === 'high') profit += 11500;
       else if (income === 'low') profit -= 8900;
 
-      // Purchase Intent Effect
+      // Intent
       if (intent === 'high') profit += 9500;
       else if (intent === 'low') profit -= 6500;
 
       const finalProfit = Math.round(profit);
       const isPositive = finalProfit >= 0;
 
-      // Update Profit Hero Text
+      // Update element
       const profitEl = document.getElementById('sim-profit');
       profitEl.textContent = (isPositive ? '$' : '-$') + Math.abs(finalProfit).toLocaleString();
-      profitEl.className = 'text-5xl sm:text-6xl font-extrabold font-mono tracking-tight my-1 ' + 
+      profitEl.className = 'text-5xl sm:text-6xl font-extrabold font-mono tracking-tight my-4 ' + 
         (finalProfit > 35000 ? 'text-brand-gold' : (finalProfit >= 0 ? 'text-brand-sky' : 'text-brand-rose'));
-
-      // Range
-      const lowRange = Math.round(finalProfit * 0.88);
-      const highRange = Math.round(finalProfit * 1.12);
-      document.getElementById('sim-margin-text').textContent = 
-        `90% Confidence Interval: $${Math.max(0, lowRange).toLocaleString()} – $${highRange.toLocaleString()}`;
-
-      // Update Badges & Recommendations
-      const badge = document.getElementById('sim-risk-badge');
-      const tier = document.getElementById('sim-tier');
-      const prob = document.getElementById('sim-prob');
-      const advice = document.getElementById('sim-advice');
-
-      if (finalProfit > 40000) {
-        badge.textContent = 'Optimal Margin (Tier A)';
-        badge.className = 'px-3 py-0.5 rounded text-xs font-mono font-bold bg-brand-emerald/20 text-brand-emerald border border-brand-emerald/40 uppercase';
-        tier.textContent = 'Tier A (High ROI)';
-        tier.className = 'text-brand-emerald text-sm';
-        prob.textContent = '96.8% Safe';
-        prob.className = 'text-brand-emerald text-sm';
-        advice.textContent = `Strong projected return. Running ${creative} format on ${platform} for ${industry} achieves premium customer lifetime value. Maintain flight past 30 days to maximize algorithmic delivery stability.`;
-      } else if (finalProfit > 12000) {
-        badge.textContent = 'Moderate Margin (Tier B)';
-        badge.className = 'px-3 py-0.5 rounded text-xs font-mono font-bold bg-brand-sky/20 text-brand-sky border border-brand-sky/40 uppercase';
-        tier.textContent = 'Tier B (Healthy Profit)';
-        tier.className = 'text-brand-sky text-sm';
-        prob.textContent = '86.4% Safe';
-        prob.className = 'text-brand-sky text-sm';
-        advice.textContent = `Healthy operational profit. Consider enabling Retargeting or elevating Creative Quality Score past 8.0 to push margins into Tier A.`;
-      } else {
-        badge.textContent = 'Elevated Risk / Low Margin';
-        badge.className = 'px-3 py-0.5 rounded text-xs font-mono font-bold bg-brand-rose/20 text-brand-rose border border-brand-rose/40 uppercase';
-        tier.textContent = 'Tier C (Thin Margin)';
-        tier.className = 'text-brand-rose text-sm';
-        prob.textContent = '54.2% Volatile';
-        advice.textContent = `Caution: Tight margin buffer. Cold-prospecting on mobile with static creative risks negative net cash burn. Shift toward Video or Desktop placement to avoid auction cost inflation.`;
-      }
-    }
-
-    // Scenarios Pre-sets
-    function loadScenario(type) {
-      if (type === 'enterprise') {
-        document.getElementById('sim-platform').value = 'LinkedIn';
-        document.getElementById('sim-industry').value = 'Finance';
-        document.getElementById('sim-creative').value = 'Video';
-        document.getElementById('sim-device').value = 'Desktop';
-        document.getElementById('sim-impressions').value = 120000;
-        document.getElementById('sim-duration').value = 60;
-        document.getElementById('sim-quality').value = 9.0;
-        document.getElementById('sim-retargeting').value = 'true';
-        document.getElementById('sim-income').value = 'high';
-        document.getElementById('sim-intent').value = 'high';
-      } else if (type === 'retargeting') {
-        document.getElementById('sim-platform').value = 'YouTube';
-        document.getElementById('sim-industry').value = 'Technology';
-        document.getElementById('sim-creative').value = 'Video';
-        document.getElementById('sim-device').value = 'Desktop';
-        document.getElementById('sim-impressions').value = 90000;
-        document.getElementById('sim-duration').value = 45;
-        document.getElementById('sim-quality').value = 8.5;
-        document.getElementById('sim-retargeting').value = 'true';
-        document.getElementById('sim-income').value = 'medium';
-        document.getElementById('sim-intent').value = 'high';
-      } else if (type === 'social') {
-        document.getElementById('sim-platform').value = 'TikTok';
-        document.getElementById('sim-industry').value = 'E-commerce';
-        document.getElementById('sim-creative').value = 'Video';
-        document.getElementById('sim-device').value = 'Mobile';
-        document.getElementById('sim-impressions').value = 150000;
-        document.getElementById('sim-duration').value = 21;
-        document.getElementById('sim-quality').value = 7.0;
-        document.getElementById('sim-retargeting').value = 'false';
-        document.getElementById('sim-income').value = 'medium';
-        document.getElementById('sim-intent').value = 'medium';
-      } else if (type === 'risky') {
-        document.getElementById('sim-platform').value = 'Twitter';
-        document.getElementById('sim-industry').value = 'Education';
-        document.getElementById('sim-creative').value = 'Static Image';
-        document.getElementById('sim-device').value = 'Mobile';
-        document.getElementById('sim-impressions').value = 35000;
-        document.getElementById('sim-duration').value = 10;
-        document.getElementById('sim-quality').value = 3.5;
-        document.getElementById('sim-retargeting').value = 'false';
-        document.getElementById('sim-income').value = 'low';
-        document.getElementById('sim-intent').value = 'low';
-      }
-      calculateProfit();
     }
 
     function resetDefaults() {
-      loadScenario('enterprise');
+      document.getElementById('sim-platform').value = 'LinkedIn';
+      document.getElementById('sim-industry').value = 'Finance';
+      document.getElementById('sim-creative').value = 'Video';
+      document.getElementById('sim-device').value = 'Desktop';
+      document.getElementById('sim-impressions').value = 85000;
+      document.getElementById('sim-duration').value = 45;
+      document.getElementById('sim-quality').value = 8.5;
+      document.getElementById('sim-retargeting').value = 'true';
+      document.getElementById('sim-income').value = 'high';
+      document.getElementById('sim-intent').value = 'high';
+      calculateProfit();
     }
 
     window.addEventListener('DOMContentLoaded', () => {
